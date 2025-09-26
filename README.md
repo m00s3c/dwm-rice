@@ -39,7 +39,7 @@ sudo make clean install
 
 * `.xinitrc` launches dwm along with picom, dunst, dwmblocks, and other background services.
 * `dwmblocks/scripts` contains shell scripts for CPU, memory, temperature, disk, network, volume, and date information.
-* All fonts are configured to use a Nerd Font so glyph icons render correctly in the bar and terminal.
+* Fonts are configured to use a Nerd Font so glyph icons render correctly in the bar and terminal.
 
 ## Notes
 
@@ -51,7 +51,7 @@ sudo make clean install
 ## Fonts
 
 This setup requires a Nerd Font to display the icons in dwmblocks and st.
-I recommend [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads) at size 12, but any Nerd Font should work.
+I use [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads) at size 10, but any Nerd Font should work.
 
 Example installation on Debian:
 
