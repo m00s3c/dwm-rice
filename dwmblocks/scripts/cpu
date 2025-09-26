@@ -1,0 +1,21 @@
+#!/bin/sh
+# ~/.suckless/dwmblocks/scripts/cpu
+
+# Get first reading
+read cpu user nice system idle iowait irq softirq steal guest < /proc/stat
+prev_idle=$idle
+prev_total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+
+# Wait a bit
+sleep 1
+
+# Get second reading
+read cpu user nice system idle iowait irq softirq steal guest < /proc/stat
+idle_diff=$((idle - prev_idle))
+total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+total_diff=$((total - prev_total))
+
+# Compute usage %
+usage=$(( (100 * (total_diff - idle_diff)) / total_diff ))
+
+printf " %s%%" "$usage"
