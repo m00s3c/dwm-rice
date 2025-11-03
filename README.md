@@ -1,63 +1,104 @@
 # dwm rice
 
-This repository contains my riced setup for dwm, st-flexipatch, and dwmblocks.  
-I keep all my suckless builds inside a hidden folder called `.suckless` in my home directory.
+This repository contains my riced dwm setup using Alacritty as the terminal and dwmblocks for the status bar.
+All builds and configuration files are stored in a hidden folder called `~/.suckless`.
+
+---
 
 ## Structure
 
-The repo is split into three folders:
+The repository includes:
 
-- `dwm` – my customized build of dwm  
-- `st-flexipatch` – my patched st terminal  
-- `dwmblocks` – my status bar with custom scripts  
+* `dwm` – customized build of dwm
+* `dwmblocks` – modular status bar with shell scripts
+* `alacritty.toml` – terminal configuration file with transparency, blur, and Catppuccin colors
 
-You will need to create a `.suckless` directory in your home folder and move these three folders into it:
+Create the `.suckless` directory and move the dwm components into it:
 
-```sh
+```bash
 mkdir -p ~/.suckless
 mv dwm ~/.suckless/
-mv st-flexipatch ~/.suckless/
 mv dwmblocks ~/.suckless/
-````
+```
+
+You can delete `st-flexipatch` if it exists, as Alacritty replaces it entirely.
+
+---
 
 ## Installation
 
-Each program must be built and installed manually:
+Build and install each component manually:
 
-```sh
+```bash
 cd ~/.suckless/dwm
-sudo make clean install
-
-cd ~/.suckless/st-flexipatch
 sudo make clean install
 
 cd ~/.suckless/dwmblocks
 sudo make clean install
 ```
 
-## Configuration
+Then install Alacritty and Picom:
 
-* `.xinitrc` launches dwm along with picom, dunst, dwmblocks, and other background services.
-* `dwmblocks/scripts` contains shell scripts for CPU, memory, temperature, disk, network, volume, and date information.
-* Fonts are configured to use a Nerd Font so glyph icons render correctly in the bar and terminal.
+```bash
+sudo apt install alacritty picom
+```
 
-## Notes
+---
 
-* I named the folder `.suckless` instead of `suckless` to keep it hidden in my home directory. This is just a preference and does not affect functionality.
-* If you prefer a visible folder, simply use `~/suckless/` instead and update your paths.
-* After cloning, you can also adjust the repo structure directly on GitHub if you decide to reorganize.
-* If you are installing this on a laptop you should add a battery gauge to the status bar.
+## Alacritty Setup
+
+1. Copy the included configuration file:
+
+   ```bash
+   mkdir -p ~/.config/alacritty
+   cp alacritty.toml ~/.config/alacritty/
+   ```
+
+2. Start Picom for transparency and blur:
+
+   ```bash
+   picom --backend glx -b
+   ```
+
+To start Picom automatically, add this line to your `~/.xinitrc` above `exec dwm`:
+
+```bash
+picom --backend glx -b &
+```
+
+---
+
+## Configuration Notes
+
+* `.xinitrc` launches dwm along with picom, dunst, and dwmblocks.
+* `dwmblocks/scripts` contains modules for CPU, memory, temperature, disk, network, volume, and date.
+* Fonts use JetBrainsMono Nerd Font for proper glyph rendering.
+
+---
 
 ## Fonts
 
-This setup requires a Nerd Font to display the icons in dwmblocks and st.
-I use [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads) at size 10, but any Nerd Font should work.
+Install a Nerd Font to display icons correctly:
 
-Example installation on Debian:
-
-```sh
+```bash
 sudo apt install fonts-jetbrains-mono
 ```
 
-## Preview
-<img width="1920" height="1080" alt="rice" src="https://github.com/user-attachments/assets/f6bcd7ef-6d23-4432-8385-b09daa7456af" />
+Alternatively, download a Nerd Font manually from [nerdfonts.com](https://www.nerdfonts.com/).
+
+---
+
+## Notes
+
+The `.suckless` directory is hidden to keep the home folder clean.
+If you prefer a visible folder, use `~/suckless` instead and update your paths accordingly.
+On laptops, you can add a battery module to `dwmblocks` for additional status information.
+
+---
+
+### Summary
+
+* Alacritty replaces st-flexipatch
+* Copy `alacritty.toml` to `~/.config/alacritty/`
+* Start Picom for transparency and blur
+* Build and install dwm and dwmblocks normally
