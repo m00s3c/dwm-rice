@@ -102,3 +102,9 @@ On laptops, you can add a battery module to `dwmblocks` for additional status in
 * Copy `alacritty.toml` to `~/.config/alacritty/`
 * Start Picom for transparency and blur
 * Build and install dwm and dwmblocks normally
+
+---
+
+### Screenshot
+
+![dwm-rice-screenshot](https://github.com/user-attachments/assets/b8ff56d9-e63d-4260-9826-5a8b5bcd9d9a)
